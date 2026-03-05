@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     public delegate void EnemyDiedFunc(float points);
     public static event EnemyDiedFunc OnEnemyDied;
 
-    public delegate void EnemyReachedEdgeFunc(float num);
+    public delegate void EnemyReachedEdgeFunc(float height);
     public static event EnemyDiedFunc OnEnemyReachedEdge;
 
     public float speed = 5f;
