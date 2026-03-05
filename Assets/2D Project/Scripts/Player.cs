@@ -17,10 +17,7 @@ public class Player : MonoBehaviour
         {
             GameObject shot = Instantiate(bulletPrefab, shootOffsetTransform.position, Quaternion.identity);
             Debug.Log("Bang!");
-
-            // todo - destroy the bullet after 3 seconds
             Destroy(shot, 3f);
-            // todo - trigger shoot animation
             GetComponent<Animator>().SetTrigger("Shot Trigger");
         }
     }
