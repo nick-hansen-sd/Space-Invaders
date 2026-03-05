@@ -5,6 +5,9 @@ public class Player : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public Transform shootOffsetTransform;
+    public float speed = 10f;
+    float minX = -7.4f;
+    float maxX = 7.4f;
 
     void Start()
     {
@@ -19,6 +22,20 @@ public class Player : MonoBehaviour
             Debug.Log("Bang!");
             Destroy(shot, 3f);
             GetComponent<Animator>().SetTrigger("Shot Trigger");
+        }
+
+        if (Keyboard.current.aKey.isPressed)
+        {
+            Vector3 newPosition = transform.position - new Vector3(speed, 0, 0) * Time.deltaTime;
+            newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
+            transform.position = newPosition;
+        }
+
+        if (Keyboard.current.dKey.isPressed)
+        {
+            Vector3 newPosition = transform.position + new Vector3(speed, 0, 0) * Time.deltaTime;
+            newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
+            transform.position = newPosition;
         }
     }
 }
