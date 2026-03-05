@@ -9,6 +9,9 @@ public class Enemy : MonoBehaviour
     public delegate void EnemyDiedFunc(float points);
     public static event EnemyDiedFunc OnEnemyDied;
 
+    public delegate void EnemyReachedEdgeFunc(float num);
+    public static event EnemyDiedFunc OnEnemyReachedEdge;
+
     public float speed = 5f;
     float minX = -7.4f;
     float maxX = 7.4f;
@@ -16,13 +19,13 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        Vector3 newPosition = transform.position - new Vector3(speed, 0, 0) * Time.deltaTime;
-        transform.position = newPosition;
-        if (transform.position.x <= minX || transform.position.x >= maxX)
-        {
-            speed = -speed;
-            transform.position = transform.position - new Vector3(0, rowHeight, 0);
-        }
+        // Vector3 newPosition = transform.position - new Vector3(speed, 0, 0) * Time.deltaTime;
+        // transform.position = newPosition;
+        // if (transform.position.x <= minX || transform.position.x >= maxX)
+        // {
+        //     speed = -speed;
+        //     transform.position = transform.position - new Vector3(0, rowHeight, 0);
+        // }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -40,13 +43,14 @@ public class Enemy : MonoBehaviour
         // todo - trigger death animation
     }
 
-    // void OnTriggerEnter2D(Collider2D other)
-    // {
-    //     if (other.gameObject.CompareTag("Edge"))
-    //     {
-    //         speed = -speed;
-    //     }
-    // }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Edge"))
+        {
+            Debug.Log("Enemy entered edge");
+            OnEnemyReachedEdge.Invoke(rowHeight);
+        }
+    }
 
     public void PlayTicSound()
     {
