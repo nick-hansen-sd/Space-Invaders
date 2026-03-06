@@ -23,7 +23,18 @@ public class Enemy : MonoBehaviour
             Destroy(collision.gameObject);
             Destroy(gameObject);
 
-            OnEnemyDied.Invoke(10);
+            if (CompareTag("Enemy1"))
+            {
+                OnEnemyDied.Invoke(10);
+            } else if (CompareTag("Enemy2"))
+            {
+                OnEnemyDied.Invoke(20);
+            } else if (CompareTag("Enemy3"))
+            {
+                OnEnemyDied.Invoke(30);
+            }
+
+            
         }
         // todo - trigger death animation
     }
