@@ -8,9 +8,12 @@ public class Player : MonoBehaviour
     public float speed = 10f;
     float minX = -7.4f;
     float maxX = 7.4f;
+    public AudioClip shoot;
+    AudioSource audioSource;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         // todo - get and cache animator
     }
     
@@ -19,6 +22,7 @@ public class Player : MonoBehaviour
         if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             GameObject shot = Instantiate(bulletPrefab, shootOffsetTransform.position, Quaternion.identity);
+            audioSource.PlayOneShot(shoot);
             Debug.Log("Bang!");
             Destroy(shot, 3f);
             GetComponent<Animator>().SetTrigger("Shot Trigger");

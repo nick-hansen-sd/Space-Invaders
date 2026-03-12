@@ -5,12 +5,15 @@ public class EnemyGroupManager : MonoBehaviour
     public float speed = 5f;
     public float speedMultiplier = 1.2f;
     bool triggeredThisStep = false; //Prevents rows from moving down multiple times per frame
+    public AudioClip enemyDestroyed;
+    AudioSource audioSource;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Enemy.OnEnemyReachedEdge += OnEnemyReachedEdge;
         Enemy.OnEnemyDied += OnEnemyDied;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -35,5 +38,6 @@ public class EnemyGroupManager : MonoBehaviour
     void OnEnemyDied(float score)
     {
         speed = speed * speedMultiplier;
+        audioSource.PlayOneShot(enemyDestroyed);
     }
 }

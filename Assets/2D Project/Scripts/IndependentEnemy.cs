@@ -6,11 +6,13 @@ public class IndependentEnemy : MonoBehaviour
     public static event IndependentEnemyDiedFunc OnIndependentEnemyDied;
     
     public float speed = 5f;
+    public AudioClip enemyDestroyed;
+    AudioSource audioSource;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -27,6 +29,7 @@ public class IndependentEnemy : MonoBehaviour
         // todo - destroy the bullet
         if (collision.gameObject.layer == LayerMask.NameToLayer("Bullet"))
         {
+            audioSource.PlayOneShot(enemyDestroyed);
             Destroy(collision.gameObject);
             Destroy(gameObject);
 
