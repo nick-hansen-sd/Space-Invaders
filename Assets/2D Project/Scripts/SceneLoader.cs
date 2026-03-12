@@ -1,10 +1,25 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
     public void LoadGame()
     {
-        SceneManager.LoadScene("Schmup");
+        StartCoroutine(_LoadGame());
+
+        IEnumerator _LoadGame() {
+            AsyncOperation loadOperation = SceneManager.LoadSceneAsync("Schmup");
+            while (!loadOperation!.isDone) yield return null;
+
+            //Wait until scene is loaded and ready and then find the player
+            GameObject playerObj = GameObject.Find("Player");
+            Debug.Log(playerObj.name);
+        }
+        
     }
 }
