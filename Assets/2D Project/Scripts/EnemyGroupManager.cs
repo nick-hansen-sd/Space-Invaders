@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyGroupManager : MonoBehaviour
 {
@@ -22,6 +23,11 @@ public class EnemyGroupManager : MonoBehaviour
         triggeredThisStep = false;
         Vector3 newPosition = transform.position - new Vector3(speed, 0, 0) * Time.deltaTime;
         transform.position = newPosition;
+
+        if (transform.childCount == 0)
+        {
+            SceneManager.LoadScene("Credits");
+        }
     }
 
     void OnEnemyReachedEdge(float rowHeight)

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
@@ -15,7 +16,6 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Ouch!");
         
         // todo - destroy the bullet
         if (collision.gameObject.layer == LayerMask.NameToLayer("Bullet"))
@@ -33,8 +33,6 @@ public class Enemy : MonoBehaviour
             {
                 OnEnemyDied.Invoke(10);
             }
-
-            
         }
         // todo - trigger death animation
     }
@@ -45,6 +43,9 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Enemy entered edge");
             OnEnemyReachedEdge.Invoke(rowHeight);
+        } else if (other.CompareTag("Player"))
+        {
+            SceneManager.LoadScene("Credits");
         }
     }
 

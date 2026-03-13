@@ -20,6 +20,11 @@ public class IndependentEnemy : MonoBehaviour
     {
         Vector3 newPosition = transform.position - new Vector3(speed, 0, 0) * Time.deltaTime;
         transform.position = newPosition;
+
+        if (transform.position.x <= -10f)
+        {
+            Destroy(gameObject);            
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
