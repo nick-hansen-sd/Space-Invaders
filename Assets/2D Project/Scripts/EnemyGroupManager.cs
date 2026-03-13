@@ -8,6 +8,7 @@ public class EnemyGroupManager : MonoBehaviour
     bool triggeredThisStep = false; //Prevents rows from moving down multiple times per frame
     public AudioClip enemyDestroyed;
     AudioSource audioSource;
+    public GameObject powerUp;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
