@@ -25,13 +25,13 @@ public class Enemy : MonoBehaviour
 
             if (CompareTag("Enemy1"))
             {
-                OnEnemyDied.Invoke(10);
+                OnEnemyDied.Invoke(30);
             } else if (CompareTag("Enemy2"))
             {
                 OnEnemyDied.Invoke(20);
             } else if (CompareTag("Enemy3"))
             {
-                OnEnemyDied.Invoke(30);
+                OnEnemyDied.Invoke(10);
             }
 
             
